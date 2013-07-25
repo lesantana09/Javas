@@ -1,9 +1,5 @@
-<%-- 
-    Document   : index
-    Created on : 23/07/2013, 17:25:10
-    Author     : Leandro
---%>
-
+<%@page import='first.model.Cliente, first.persistence.ClienteDao' %>
+<%@page import='java.util.List' %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,7 +22,40 @@
             <input type="text" name="site"/><br/>
             
             <input type="submit" value="Cadastrar Cliente"/>
-
-        </form>      
+            ${msg}
+        </form>   
+        <br/>
+        <br/>
+        <h1>Lista de Clientes</h1>
+        <table width="50%" border="1">
+            <tr>
+                <td>Codigo do Cliente</td>
+                <td>Nome</td>
+                <td>Telefone</td>
+                <td>Email</td>
+                <td>Site</td>
+            </tr>
+            <%
+                try{
+                ClienteDao cd = new ClienteDao();
+                List<Cliente> lista = cd.ListarClientes();
+                for(Cliente c : lista){     
+            %>
+            <tr>
+                <td><%= c.getCod_cliente() %></td>
+                <td><%= c.getNome()  %></td>
+                <td><%= c.getTelefone()  %></td>
+                <td><%= c.getEmail()  %></td>
+                <td><%= c.getSite()  %></td>
+            </tr>
+            <%  
+                }
+                 }catch(Exception e){
+                    out.print("Erro");
+                }
+            %>
+                
+           
+        </table>
     </body>
 </html>

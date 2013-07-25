@@ -5,10 +5,12 @@ try{
     String action = request.getParameter("action");
     if(action.equalsIgnoreCase("cadastrar")){
     Cliente c = new Cliente();
+       
         c.setNome(request.getParameter("nome"));
         c.setTelefone(request.getParameter("telefone"));
         c.setEmail(request.getParameter("email"));
         c.setSite(request.getParameter("site"));
+        
         ClienteDao cd = new ClienteDao();
         try{
             cd.cadastrar(c);           
@@ -20,7 +22,5 @@ try{
     }
 }catch(NullPointerException nexp){
  out.print("Você deveria não deveria estar vendo esse aviso.");
-}
- 
-    
+}  
 %>

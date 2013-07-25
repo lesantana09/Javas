@@ -19,6 +19,7 @@ public class ClienteDao extends Dao {
     }
 
     public void delete(Cliente c) throws Exception {
+        OpenDatabase();
         String SQL = "DELETE tbl_cliente WHERE cod_cliente=?";
         pstmt = con.prepareStatement(SQL);
         pstmt.setInt(1, c.getCod_cliente());
@@ -26,11 +27,14 @@ public class ClienteDao extends Dao {
     }
 
     public List<Cliente> ListarClientes() throws Exception {
+        OpenDatabase();
         String SQL = "SELECT * FROM tbl_cliente";
-        rs = pstmt.executeQuery(SQL);
-        Cliente c = new Cliente();
+        pstmt = con.prepareStatement(SQL);
+        rs = pstmt.executeQuery();
+        Cliente c = null;
         List<Cliente> listaClientes = new ArrayList<Cliente>();
-        if (rs.next()) {
+        while (rs.next()) {
+            c = new Cliente();
             c.setCod_cliente(rs.getInt("cod_cliente"));
             c.setNome(rs.getString("nome"));
             c.setTelefone(rs.getString("telefone"));
@@ -38,8 +42,8 @@ public class ClienteDao extends Dao {
             c.setSite(rs.getString("site"));
             listaClientes.add(c);
         }
+        CloseDatabase();
         return listaClientes;
-
     }
 
     public void update(Cliente c) throws Exception {
