@@ -20,7 +20,7 @@
 
             <label for="site">Site:</label><br/>
             <input type="text" name="site"/><br/>
-            
+
             <input type="submit" value="Cadastrar Cliente"/>
             ${msg}
         </form>   
@@ -34,28 +34,31 @@
                 <td>Telefone</td>
                 <td>Email</td>
                 <td>Site</td>
+                <td>Excluir</td>
+                <td>Atualizar</td>
             </tr>
             <%
-                try{
-                ClienteDao cd = new ClienteDao();
-                List<Cliente> lista = cd.ListarClientes();
-                for(Cliente c : lista){     
+                try {
+                    ClienteDao cd = new ClienteDao();
+                    List<Cliente> lista = cd.ListarClientes();
+                    for (Cliente c : lista) {
             %>
             <tr>
-                <td><%= c.getCod_cliente() %></td>
-                <td><%= c.getNome()  %></td>
-                <td><%= c.getTelefone()  %></td>
-                <td><%= c.getEmail()  %></td>
-                <td><%= c.getSite()  %></td>
+                <td><%= c.getCod_cliente()%></td>
+                <td><%= c.getNome()%></td>
+                <td><%= c.getTelefone()%></td>
+                <td><%= c.getEmail()%></td>
+                <td><%= c.getSite()%></td>
+                <td><%= ("<a href=controle.jsp?action=excluir&cod_cliente="+c.getCod_cliente()+">Excluir</a>") %></td>
+                <td><%= ("<a href=atualizar.jsp?cod_cliente="+c.getCod_cliente()+">Atualizar</a>") %></td>
+
             </tr>
-            <%  
-                }
-                 }catch(Exception e){
+            <%
+                    }
+                } catch (Exception e) {
                     out.print("Erro");
                 }
             %>
-                
-           
         </table>
     </body>
 </html>
