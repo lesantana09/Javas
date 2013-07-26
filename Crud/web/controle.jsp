@@ -16,7 +16,8 @@
                 request.setAttribute("msg", "Cadastrado com sucesso!");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } catch (Exception e) {
-                out.print(e.getMessage());
+                //out.print(e.getMessage());
+                System.out.println("Hello World vixe!");
             }
         } else if (action.equalsIgnoreCase("excluir")) {
             try {
